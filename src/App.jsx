@@ -3,7 +3,12 @@ import ChatBar from './ChatBar.jsx';
 import Message from './Message.jsx';
 import MessageList from './MessageList.jsx'
 
-{
+
+
+class App extends Component {
+  constructor(props) {
+    super();
+    this.state = {
   currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
   messages: [
     {
@@ -15,17 +20,19 @@ import MessageList from './MessageList.jsx'
       content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
     }
   ]
-}
 
-class App extends Component {
+};
+
+
+  }
   render() {
     return (
       <div>
         <nav className="navbar">
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
-        <MessageList />
-        <ChatBar />
+        <MessageList messages={this.state.messages}/>
+        <ChatBar user={this.state.currentUser}/>
       </div>
      );
   }
