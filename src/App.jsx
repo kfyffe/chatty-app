@@ -27,7 +27,6 @@ class App extends Component {
 
 }
 createNewMessage = (currentMessage) => {
-    debugger
     const existingMessages = this.state.messages;
     const newMessages = existingMessages.concat(currentMessage);
     this.setState({
@@ -45,12 +44,13 @@ createNewMessage = (currentMessage) => {
     const messages = this.state.messages.concat(newMessage)
     // Update the state of the app component.
     // Calling setState will trigger a call to render() in App and all child components.
-    this.setState({messages: messages})
+    this.setState({
+      messages: messages
+    })
   }, 3000);
 }
 
   render() {
-    debugger
     return (
       <div>
         <nav className="navbar">
