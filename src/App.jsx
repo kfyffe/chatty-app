@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super();
     this.state = {
-  currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
+  currentUser: {name: "Bob", id: 12345}, // optional. if currentUser is not defined, it means the user is Anonymous
   messages: [
     {
       username: "Bob",
@@ -26,9 +26,10 @@ class App extends Component {
   };
 
 }
-createNewMessage (message) {
+createNewMessage = (currentMessage) => {
+    debugger
     const existingMessages = this.state.messages;
-    const newMessages = [...existingMessages, message];
+    const newMessages = existingMessages.concat(currentMessage);
     this.setState({
       messages: newMessages
     });
@@ -49,6 +50,7 @@ createNewMessage (message) {
 }
 
   render() {
+    debugger
     return (
       <div>
         <nav className="navbar">
