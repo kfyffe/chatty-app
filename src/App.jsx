@@ -37,6 +37,7 @@ createNewMessage = (currentMessage) => {
 
   componentDidMount() {
   console.log("componentDidMount <App />");
+
   setTimeout(() => {
     console.log("Simulating incoming message");
     // Add a new message to the list of messages in the data store
@@ -48,7 +49,14 @@ createNewMessage = (currentMessage) => {
       messages: messages
     })
   }, 3000);
+
+  let socket = new WebSocket("ws://localhost:3001")
+  socket.onopen = () => {
+   console.log('Connected to server')
+  }
+
 }
+
 
   render() {
     return (
