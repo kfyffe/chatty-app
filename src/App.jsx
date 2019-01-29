@@ -19,9 +19,6 @@ class App extends Component {
 createNewMessage = (currentMessage) => {
     const existingMessages = this.state.messages;
     const newMessages = existingMessages.concat(currentMessage);
-    // this.setState({
-    //   messages: newMessages
-    // });
     this.socket.send(JSON.stringify(currentMessage))
   }
 
@@ -43,7 +40,16 @@ createNewMessage = (currentMessage) => {
 
     this.socket = new WebSocket("ws://localhost:3001")
     this.socket.onopen = () => {
-     console.log('Connected to server')
+      console.log('Connected to server')
+
+    }
+    this.socket.onmessage = (data) => {
+      const parsedMessage = JSON.parse(data.data);
+      console.log('Parsed Message: ', parsedMessage)
+      const message = this.state.messages.concat(parsedMessage)
+      this.setState({
+        messages: message
+      })
     }
 
   }
