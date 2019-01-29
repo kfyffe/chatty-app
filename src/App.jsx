@@ -9,19 +9,8 @@ class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      currentUser: {name: "Bob", id: 12345}, // optional. if currentUser is not defined, it means the user is Anonymous
-      messages: [
-        {
-          username: "Bob",
-          content: "Has anyone seen my marbles?",
-          id: 12345
-        },
-        {
-          username: "Anonymous",
-          content: "No, I think you lost them. You lost your marbles Bob. You lost them for good.",
-          id: 23456
-        }
-      ]
+      currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
+      messages: []
 
     };
     this.socket = null;
