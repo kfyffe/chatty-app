@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      currentUser: {username: 'Anonymous'}, // optional. if currentUser is not defined, it means the user is Anonymous
+      currentUser: {name: 'Anonymous'}, // optional. if currentUser is not defined, it means the user is Anonymous
       messages: []
 
     };
@@ -17,12 +17,22 @@ class App extends Component {
 
 }
 
-createNewUser = (username) => {
+createNewUser = (name) => {
   const existingUser = this.state.currentUser;
   console.log('the existingUser is: ', existingUser)
-  this.state.currentUser.username = username
-  console.log('the new currentUser is: ', this.state.currentUser)
-  // this.socket.send(JSON.stringify)
+
+  console.log('the new currentUser is: ', name)
+  const userChange = {
+    name,
+    type: 'Post Notification',
+    content: `${existingUser.name} changed their name to ${name}`
+  }
+  this.socket.send(JSON.stringify(userChange))
+  this.setState({
+    currentUser: {
+      name: name
+    }
+  })
 }
 
 createNewMessage = (currentMessage) => {
@@ -59,6 +69,7 @@ createNewMessage = (currentMessage) => {
       this.setState({
         messages: message
       })
+      console.log('New State: ', this.state)
     }
 
   }
