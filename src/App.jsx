@@ -17,7 +17,7 @@ class App extends Component {
 
   createNewUser = (name) => {
     const existingUser = this.state.currentUser;
-    if (name !== existingUser) {
+    if (name !== existingUser.name) {
       const userChange = {
       name,
       type: 'postNotification',
@@ -34,9 +34,12 @@ class App extends Component {
   }
 
   createNewMessage = (currentMessage) => {
-    const existingMessages = this.state.messages;
-    const newMessages = existingMessages.concat(currentMessage);
-    this.socket.send(JSON.stringify(currentMessage))
+    if (currentMessage.content.length > 0) {
+      const existingMessages = this.state.messages;
+      const newMessages = existingMessages.concat(currentMessage);
+      this.socket.send(JSON.stringify(currentMessage))
+    }
+
   }
 
   handleClientCount(data) {
