@@ -24,7 +24,7 @@ createNewUser = (name) => {
   console.log('the new currentUser is: ', name)
   const userChange = {
     name,
-    type: 'Post Notification',
+    type: 'postNotification',
     content: `${existingUser.name} changed their name to ${name}`
   }
   this.socket.send(JSON.stringify(userChange))
