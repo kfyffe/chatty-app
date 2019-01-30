@@ -37,6 +37,20 @@ wss.on('connection', (ws) => {
   ws.on('message', function incoming (message) {
     let clientMessage = JSON.parse(message);
     clientMessage.id = uuidv4();
+    console.log('Server Side clientMessage: ', clientMessage)
+
+    switch(clientMessage.type){
+      case "postMessage":
+        clientMessage.type = "incomingMessage"
+        break;
+      case "postNotification":
+        clientMessage.type = "incomingNotification"
+        break;
+      default:
+        // show an error in the console if the message type is unknown
+        throw new Error("Unknown event type " + clientMessage.type);
+    }
+
     const messageWithId = JSON.stringify(clientMessage);
     console.log(messageWithId);
 

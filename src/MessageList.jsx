@@ -8,7 +8,7 @@ class MessageList extends Component {
     const messages = this.props.messages;
     console.log('MessageList: Messages: ', messages)
     const messageComponents = messages.map((message) => {
-      return <Message id={message.id} text={message} type={} />
+      return <Message id={message.id} text={message} type={message.type} />
     })
 
     return (

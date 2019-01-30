@@ -5,7 +5,7 @@ class ChatBar extends Component {
 
   handleNewMessage = (event) => {
      const value = event.target.value;
-     const currentMessage = {name: this.props.user.name, content: value, id: this.props.user.id}
+     const currentMessage = {name: this.props.user.name, content: value, type: "postMessage"}
      console.log('currentMessage: ', currentMessage)
      this.props.createNewMessage(currentMessage);
      event.target.value = '';
