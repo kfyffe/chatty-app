@@ -4,12 +4,10 @@ class ChatBar extends Component {
 
 
   handleNewMessage = (event) => {
-     const value = event.target.value;
-     const currentMessage = {name: this.props.user.name, content: value, type: "postMessage"}
-     console.log('currentMessage: ', currentMessage)
-     this.props.createNewMessage(currentMessage);
-     event.target.value = '';
-
+    const value = event.target.value;
+    const currentMessage = {name: this.props.user.name, content: value, type: "postMessage"}
+    this.props.createNewMessage(currentMessage);
+    event.target.value = '';
   }
 
   handleMsgKeyPress = (event) => {
@@ -25,7 +23,7 @@ class ChatBar extends Component {
 
   handleUserKeyPress = (event) => {
     if (event.key === 'Enter') {
-    this.handleNewUser(event);
+      this.handleNewUser(event);
     }
   }
 
