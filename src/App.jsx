@@ -44,8 +44,10 @@ class App extends Component {
 
   handleClientCount(data) {
       this.setState({
-        clientCount: data.count
+        clientCount: data.count,
+        color: data.color
       })
+      console.log('handle clientcount: ', this.state.color)
     }
 
 
@@ -63,8 +65,10 @@ class App extends Component {
       if (messageType === 'clientCount') {
         console.log('If statement message type: ', this)
         this.handleClientCount(parsedMessage.payload)
+        console.log('parsedMessage.payload', parsedMessage.payload.color)
       } else {
         const message = this.state.messages.concat(parsedMessage)
+        console.log('Else: ', message)
         this.setState({
           messages: message
         })
