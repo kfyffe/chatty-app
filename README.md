@@ -5,6 +5,8 @@ An interactive chat application using ReactJS.
 
 ### Final Product
 
+!["Screenshot of message screen"](chatty-app/Docs/ChattyMessages.png)
+      
 
 ### Dependencies
 
