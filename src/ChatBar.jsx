@@ -5,7 +5,11 @@ class ChatBar extends Component {
 
   handleNewMessage = (event) => {
     const value = event.target.value;
-    const currentMessage = {name: this.props.user.name, content: value, type: "postMessage"}
+    const currentMessage = {
+      name: this.props.user.name,
+      content: value,
+      type: "postMessage"
+    }
     this.props.createNewMessage(currentMessage);
     event.target.value = '';
   }
@@ -28,7 +32,7 @@ class ChatBar extends Component {
   }
 
   render(){
-    return(
+    return (
       <footer className="chatbar">
         <input className="chatbar-username" placeholder="Your Name (Optional)" onKeyDown={this.handleUserKeyPress} onBlur={this.handleNewUser} defaultValue={this.props.username}/>
         <input className="chatbar-message" placeholder="Type a message and hit ENTER" type="text" name="messageInput" onKeyDown={this.handleMsgKeyPress} />

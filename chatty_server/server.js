@@ -4,15 +4,15 @@ const express = require('express');
 const WebSocket = require('ws');
 const uuidv4 = require('uuid/v4');
 
-console.log(WebSocket)
+console.log(WebSocket);
 
 // Set the port to 3001
 const PORT = 3001;
 
 // Create a new express server
-const server = express()
+const server = express();
    // Make the express server serve static assets (html, javascript, css) from the /public folder
-  .use(express.static('public'))
+  .use(express.static('public'));
   .listen(PORT, '0.0.0.0', 'localhost', () => console.log(`Listening on ${ PORT }`));
 
 // Create the WebSockets server
@@ -35,6 +35,7 @@ wss.broadcast = function broadcast(messageWithId) {
 wss.on('connection', (ws) => {
   console.log('Client connected');
 
+//color generator for each instance/person name
   const userColors = ['#0074D9', '#3D9970', '#FFDC00', '#B10DC9', '#39CCCC', '#FF851B', '#01FF70', '#F012BE', '#85144b']
   let randomColor = userColors[Math.floor(Math.random()*userColors.length)];
   ws.color = randomColor;
@@ -44,18 +45,16 @@ wss.on('connection', (ws) => {
       type: 'clientCount',
       payload: {
         count: wss.clients.size,
-        }
       }
-      console.log(clientCount)
+    }
 
       client.send(JSON.stringify(clientCount))
   })
 
   ws.on('message', function incoming (message) {
     let clientMessage = JSON.parse(message);
-    clientMessage.id = uuidv4();
-    clientMessage.color = ws.color;
-    console.log('Server Side clientMessage: ', clientMessage)
+    clientMessage.id = uuidv4(); //random id is generated and added to clientMessage object
+    clientMessage.color = ws.color; //text color is randomly selected add added to clientMessage object
 
     switch(clientMessage.type){
       case "postMessage":
@@ -70,15 +69,12 @@ wss.on('connection', (ws) => {
     }
 
     const messageWithId = JSON.stringify(clientMessage);
-    console.log(messageWithId);
-
 
     wss.broadcast(messageWithId);
 
-
   });
 
-  // Set up a callback for when a client closes the socket. This usually means they closed their browser.
+  // callback for when a client closes the socket (closes browser window). Number of people chatting gets reduced.
   ws.on('close', () => {
     console.log('Client disconnected')
     wss.clients.forEach(client => {

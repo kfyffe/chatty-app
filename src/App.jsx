@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ChatBar from './ChatBar.jsx';
 import Message from './Message.jsx';
-import MessageList from './MessageList.jsx'
+import MessageList from './MessageList.jsx';
 
 
 class App extends Component {
@@ -15,6 +15,7 @@ class App extends Component {
     this.socket = null;
   }
 
+//function that compares a new username to an existing username and sends message to server
   createNewUser = (name) => {
     const existingUser = this.state.currentUser;
     if (name !== existingUser.name) {
@@ -23,7 +24,7 @@ class App extends Component {
       type: 'postNotification',
       content: `${existingUser.name} changed their name to ${name}`
       }
-      this.socket.send(JSON.stringify(userChange))
+      this.socket.send(JSON.stringify(userChange));
       this.setState({
         currentUser: {
           name: name
@@ -33,42 +34,38 @@ class App extends Component {
 
   }
 
+//function that adds new messages to existing messages and sends to server
   createNewMessage = (currentMessage) => {
     if (currentMessage.content.length > 0) {
       const existingMessages = this.state.messages;
       const newMessages = existingMessages.concat(currentMessage);
-      this.socket.send(JSON.stringify(currentMessage))
+      this.socket.send(JSON.stringify(currentMessage));
     }
-
   }
 
+//helper function for tracking number of people using Chatty
   handleClientCount(data) {
       this.setState({
         clientCount: data.count,
-        color: data.color
       })
-      console.log('handle clientcount: ', this.state.color)
     }
 
 
   componentDidMount() {
     console.log("componentDidMount <App />");
 
-    this.socket = new WebSocket("ws://localhost:3001")
+    this.socket = new WebSocket("ws://localhost:3001");
     this.socket.onopen = () => {
-      console.log('Connected to server')
+      console.log('Connected to server');
     }
     this.socket.onmessage = (data) => {
       const parsedMessage = JSON.parse(data.data);
-      let messageType = parsedMessage.type
+      let messageType = parsedMessage.type;
 
       if (messageType === 'clientCount') {
-        console.log('If statement message type: ', this)
-        this.handleClientCount(parsedMessage.payload)
-        console.log('parsedMessage.payload', parsedMessage.payload.color)
+        this.handleClientCount(parsedMessage.payload);
       } else {
-        const message = this.state.messages.concat(parsedMessage)
-        console.log('Else: ', message)
+        const message = this.state.messages.concat(parsedMessage);
         this.setState({
           messages: message
         })
