@@ -36,7 +36,7 @@ An interactive chat application using ReactJS.
 - Install all dependencies (using the `npm install` command).
 - Open two terminal windows
   - One window for the server: cd into folder: chatty_server and `npm start`
-  - Second window for the client: cd into folder: chatty-react and `npm start`
+  - Second window for the client: cd into folder: react-simple-boilerplate and `npm start`
 - In your browser navigate to: `http://localhost:3000/`
 
 
